@@ -1,10 +1,27 @@
-$radius: 12px;
+/* Colors */
 
-$space-s: .5rem;
+$color-overlay: rgba(0, 0, 0, 0.45);
+$color-title: #fff;
+
+/* Spacing */
+
+$space-s: 0.5rem;
 $space-m: 1rem;
 $space-l: 2rem;
 $space-xl: 3rem;
 
-$overlay: rgba(0, 0, 0, .45);
+/* Typography */
 
-$transition: .3s ease;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+
+/* Effects */
+
+$shadow-title: 0 0 8px rgba(0, 0, 0, 0.9);
+
+$transition-fast: 0.2s ease;
+$transition: 0.3s ease;
+
+/* Layout */
+
+$album-ratio: 4 / 3;

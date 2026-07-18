@@ -8,13 +8,13 @@ h5,
 h6 {
     margin: 0;
     line-height: 1.15;
-    font-weight: 300;
+    font-weight: $font-weight-light;
 }
 
 /* Page title */
 
 h1 {
-    margin-bottom: 2rem;
+    margin-bottom: $space-l;
 
     font-size: clamp(2.5rem, 5vw, 5rem);
 
@@ -25,13 +25,13 @@ h1 {
 
 /* Album title */
 
-.album-card-content h2 {
+.album-card > .album-card-overlay > h2 {
     margin: 0;
 
-    color: #fff;
+    color: $color-title;
 
     font-size: clamp(2rem, 3vw, 3.4rem);
-    font-weight: 300;
+    font-weight: $font-weight-light;
     line-height: 1.1;
 
     text-align: center;
@@ -40,23 +40,23 @@ h1 {
     text-transform: lowercase;
     letter-spacing: 0.03em;
 
-    text-shadow: 0 0 8px rgba(0, 0, 0, .9);
+    text-shadow: $shadow-title;
 
-    transition: transform .3s ease;
+    transition: transform $transition;
 }
 
 /* Body */
 
 body {
     line-height: 1.7;
-    font-weight: 400;
+    font-weight: $font-weight-normal;
 }
 
 /* Links */
 
 a {
     text-decoration: none;
-    transition: opacity .2s ease;
+    transition: opacity $transition-fast;
 }
 
 a:hover {

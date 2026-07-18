@@ -1,0 +1,20 @@
+/* Header */
+
+header {
+    padding: 2rem 1.5rem;
+}
+
+header .btn {
+    padding: 0;
+    border-radius: 0;
+
+    font-size: 1rem;
+    font-weight: 400;
+
+    background: none;
+    box-shadow: none;
+}
+
+header .btn:hover {
+    opacity: .7;
+}

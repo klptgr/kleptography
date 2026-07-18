@@ -1,16 +1,17 @@
 {{ $gallery := partial "get-gallery.html" . }}
 {{ with $gallery }}
-  <a class="card post-card" href="{{ .page.RelPermalink }}" title="{{ .page.Title }}">
-    <figure style="background-color: {{ .color }}">
-      <img class="lazyload"
-        width="{{ .thumbnail.Width }}"
-        height="{{ .thumbnail.Height }}"
-        data-src="{{ .thumbnail.RelPermalink }}"
-        alt="{{ .page.Title }}" />
-
-      <div class="album-card-content">
-        <h2>{{ .page.Title }}</h2>
-      </div>
+<a class="card album-card" href="{{ .page.RelPermalink }}" title="{{ .page.Title }}">
+    <figure class="album-card-image" style="background-color: {{ .color }}">
+        <img
+            class="lazyload"
+            width="{{ .thumbnail.Width }}"
+            height="{{ .thumbnail.Height }}"
+            data-src="{{ .thumbnail.RelPermalink }}"
+            alt="{{ .page.Title }}">
     </figure>
-  </a>
+
+    <div class="album-card-overlay">
+        <h2>{{ .page.Title }}</h2>
+    </div>
+</a>
 {{ end }}
