@@ -1,0 +1,21 @@
+# Hugo output
+public/
+resources/_gen/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Optional: ignore local photo files
+# Uncomment only if you don't want images in Git
+# content/**/*.jpg
+# content/**/*.jpeg
+# content/**/*.png
+# content/**/*.webp

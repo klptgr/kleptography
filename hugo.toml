@@ -1,0 +1,16 @@
+baseURL = 'https://kleptography.pages.dev/' # Production URL
+languageCode = 'en-us'
+title = 'Kleptography'
+theme = 'gallery' # Tells Hugo to look inside themes/gallery
+
+[params]
+  # Basic settings inherited from the gallery theme
+  description = "A minimalist photography portfolio"
+  columns = 3 # Grid column layout for albums
+
+[mediaTypes."image/jpeg"]
+  suffixes = ["jpg", "jpeg"]
+
+[imaging]
+  resampleFilter = "Lanczos"
+  quality = 85 # Balanced compression for web delivery

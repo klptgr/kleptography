@@ -1,0 +1,64 @@
+/* Headings */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    line-height: 1.15;
+    font-weight: 300;
+}
+
+/* Page title */
+
+h1 {
+    margin-bottom: 2rem;
+
+    font-size: clamp(2.5rem, 5vw, 5rem);
+
+    font-variant: small-caps;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+}
+
+/* Album title */
+
+.album-card-content h2 {
+    margin: 0;
+
+    color: #fff;
+
+    font-size: clamp(2rem, 3vw, 3.4rem);
+    font-weight: 300;
+    line-height: 1.1;
+
+    text-align: center;
+
+    font-variant: small-caps;
+    text-transform: lowercase;
+    letter-spacing: 0.03em;
+
+    text-shadow: 0 0 8px rgba(0, 0, 0, .9);
+
+    transition: transform .3s ease;
+}
+
+/* Body */
+
+body {
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+/* Links */
+
+a {
+    text-decoration: none;
+    transition: opacity .2s ease;
+}
+
+a:hover {
+    opacity: .85;
+}
