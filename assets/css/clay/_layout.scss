@@ -4,17 +4,15 @@ body {
     margin: 0;
 }
 
-/* Shared content width */
+/* Shared width */
 
 header,
 main,
 footer {
     width: 100%;
     max-width: $content-width;
-
     margin-inline: auto;
     padding-inline: $space-l;
-
     box-sizing: border-box;
 }
 
@@ -26,18 +24,4 @@ header {
 
 main {
     margin-bottom: $space-xl;
-}
-
-/* Gallery */
-
-section.galleries {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-}
-
-@media (max-width: 700px) {
-    section.galleries {
-        grid-template-columns: 1fr;
-    }
 }
