@@ -1,5 +1,5 @@
 {{ define "main" }}
-<div class="list-page">
+<div class="list-page{{ if eq .Section "portfolio" }} portfolio-page{{ end }}">
     {{ partial "page-header.html" . }}
     
     <section class="page-content">
