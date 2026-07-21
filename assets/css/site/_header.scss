@@ -52,6 +52,10 @@
     font-size: 0.95rem;
     transition: opacity $transition-fast;
     position: relative;
+
+    @media (min-width: $breakpoint-md) {
+        color: var(--text-2);
+    }
     
     &::after {
         content: '';
