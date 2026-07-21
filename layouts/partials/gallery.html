@@ -1,86 +1,53 @@
 <section class="gallery album-page">
-
-    <div id="gallery" class="album-gallery" style="visibility: hidden; height: 1px; overflow: hidden">
-
+    <div class="album-gallery" id="gallery" data-gallery-container>
         {{ $images := slice }}
 
-        {{ range $image := where (.Resources.ByType "image") "Params.hidden" "ne" true }}
+        {{ range where (.Resources.ByType "image") "Params.hidden" "ne" true }}
             {{ $title := "" }}
             {{ $date := "" }}
 
-            {{ with $image.Exif }}
+            {{ with .Exif }}
                 {{ $date = .Date }}
-
                 {{ with .Tags.ImageDescription }}
                     {{ $title = . }}
                 {{ end }}
             {{ end }}
 
-            {{ if ne $image.Title $image.Name }}
-                {{ $title = $image.Title }}
+            {{ if ne .Title .Name }}
+                {{ $title = .Title }}
             {{ end }}
 
-            {{ if $image.Params.Date }}
-                {{ $date = time $image.Params.Date }}
+            {{ with .Params.Date }}
+                {{ $date = time . }}
             {{ end }}
 
             {{ $images = $images | append (dict
-                "Name" $image.Name
+                "image" .
+                "Name" .Name
                 "Title" $title
                 "Date" $date
-                "image" $image
-                "Params" $image.Params
+                "Params" .Params
             ) }}
         {{ end }}
 
         {{ $publishResources := default true .Params.build.publishResources }}
+        {{ $sortBy := .Params.sort_by | default "Name" }}
+        {{ $sortOrder := .Params.sort_order | default "asc" }}
 
-        {{ range sort $images (.Params.sort_by | default "Name") (.Params.sort_order | default "asc") }}
-
+        {{ range sort $images $sortBy $sortOrder }}
             {{ $image := .image }}
-            {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process "fit 600x600")) }}
+            {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process "fit 400x400")) }}
             {{ $full := $image.Filter (slice images.AutoOrient (images.Process "fit 1600x1600")) }}
             {{ $color := index $thumbnail.Colors 0 | default "transparent" }}
 
-            <a
-                class="gallery-item album-photo"
-                href="{{ if $publishResources }}{{ $image.RelPermalink }}{{ else }}{{ $full.RelPermalink }}{{ end }}"
-                data-pswp-src="{{ $full.RelPermalink }}"
-                data-pswp-width="{{ $full.Width }}"
-                data-pswp-height="{{ $full.Height }}"
-                data-pswp-target="{{ $image.Name | urlize }}"
-                title="{{ .Title }}"
-                itemscope
-                itemtype="https://schema.org/ImageObject"
-                style="aspect-ratio: {{ $thumbnail.Width }} / {{ $thumbnail.Height }}">
-
-                <figure
-                    class="album-photo-image"
-                    style="background-color: {{ $color }}; aspect-ratio: {{ $thumbnail.Width }} / {{ $thumbnail.Height }}">
-
-                    <img
-                        class="lazyload"
-                        width="{{ $thumbnail.Width }}"
-                        height="{{ $thumbnail.Height }}"
-                        data-src="{{ $thumbnail.RelPermalink }}"
-                        alt="{{ .Title }}" />
-
-                </figure>
-
-                <meta
-                    itemprop="contentUrl"
-                    content="{{ if $publishResources }}{{ $image.RelPermalink }}{{ else }}{{ $full.RelPermalink }}{{ end }}" />
-
-                {{ with site.Params.Author }}
-                    <span itemprop="creator" itemtype="https://schema.org/Person" itemscope>
-                        <meta itemprop="name" content="{{ site.Params.Author.name }}" />
-                    </span>
-                {{ end }}
-
-            </a>
-
+            {{ partial "photo.html" (dict
+                "image" $image
+                "thumbnail" $thumbnail
+                "full" $full
+                "title" .Title
+                "color" $color
+                "publishResources" $publishResources
+            ) }}
         {{ end }}
-
     </div>
-
 </section>

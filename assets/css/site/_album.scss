@@ -1,0 +1,70 @@
+/* Album gallery container */
+.album-gallery {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    
+    @media (min-width: $breakpoint-sm) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    @media (min-width: $breakpoint-lg) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+    }
+}
+
+/* Individual gallery item */
+.gallery-item {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform $transition;
+    
+    &:hover {
+        transform: scale(1.02);
+    }
+    
+    &:focus-visible {
+        outline: 2px solid var(--text-1);
+        outline-offset: 2px;
+    }
+}
+
+.gallery-item figure {
+    margin: 0;
+}
+
+.gallery-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: $radius-sm;
+    
+    @media (min-width: $breakpoint-sm) {
+        border-radius: $radius-md;
+    }
+    
+    @media (min-width: $breakpoint-lg) {
+        border-radius: $radius-lg;
+    }
+}
+
+.gallery-item figcaption {
+    margin-top: .75rem;
+    color: var(--text-2);
+    font-size: .9rem;
+    line-height: 1.5;
+}
+
+/* Loading state */
+.gallery-item img.lazyload,
+.gallery-item img.lazyloading {
+    opacity: 0;
+    transition: opacity 300ms;
+}
+
+.gallery-item img.lazyloaded {
+    opacity: 1;
+}

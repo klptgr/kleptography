@@ -7,12 +7,12 @@ A personal photography portfolio built with Hugo.
 - Hugo
 - hugo-gallery theme
 - Modular SCSS
-- CLAY-inspired design
+- site-inspired design
 
 ## Structure
 
 assets/css/
-    clay/
+    site/
         _variables.scss
         _layout.scss
         _typography.scss

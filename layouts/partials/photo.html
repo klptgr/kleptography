@@ -1,0 +1,58 @@
+{{ $imageUrl := "" }}
+{{ if .publishResources }}
+    {{ $imageUrl = .image.RelPermalink }}
+{{ else }}
+    {{ $imageUrl = .full.RelPermalink }}
+{{ end }}
+
+{{ $title := .title | default .image.Name }}
+{{ $altText := $title }}
+
+<a
+    class="gallery-item"
+    href="{{ $imageUrl }}"
+    data-pswp-src="{{ .full.RelPermalink }}"
+    data-pswp-width="{{ .full.Width }}"
+    data-pswp-height="{{ .full.Height }}"
+    data-pswp-target="{{ .image.Name | urlize }}"
+    title="{{ $title }}"
+    aria-label="{{ $title }}"
+    itemscope
+    itemtype="https://schema.org/ImageObject">
+
+    <figure 
+        class="album-photo-image" 
+        style="background-color: {{ .color }}; aspect-ratio: {{ .thumbnail.Width }} / {{ .thumbnail.Height }}">
+        
+        <img
+            class="lazyload"
+            width="{{ .thumbnail.Width }}"
+            height="{{ .thumbnail.Height }}"
+            data-src="{{ .thumbnail.RelPermalink }}"
+            alt="{{ $altText }}"
+            loading="lazy"
+            decoding="async" />
+        
+        {{ if $title }}
+        <figcaption class="visually-hidden">
+            {{ $title }}
+        </figcaption>
+        {{ end }}
+    </figure>
+
+    <!-- Schema.org metadata -->
+    <meta itemprop="contentUrl" content="{{ $imageUrl }}" />
+    <meta itemprop="thumbnailUrl" content="{{ .thumbnail.RelPermalink }}" />
+    <meta itemprop="width" content="{{ .full.Width }}" />
+    <meta itemprop="height" content="{{ .full.Height }}" />
+
+    {{ with site.Params.Author }}
+        <span itemprop="creator" itemscope itemtype="https://schema.org/Person">
+            <meta itemprop="name" content="{{ .name }}" />
+        </span>
+    {{ end }}
+    
+    {{ with $title }}
+        <span itemprop="caption" content="{{ . }}"></span>
+    {{ end }}
+</a>

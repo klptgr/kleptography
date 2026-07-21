@@ -1,21 +1,72 @@
+/* Third-party */
 @import "normalize";
-@import "colors";
-@import "styles";
 @import "photoswipe/photoswipe";
 @import "photoswipe/photoswipe-dynamic-caption-plugin";
+
+/* Custom styles */
 @import "custom";
 
-
+/* Lazy loading */
 .lazyload,
 .lazyloading {
-  opacity: 0;
+    opacity: 0;
+    transition: opacity 300ms ease-in;
 }
 
 .lazyloaded {
-  opacity: 1;
-  transition: opacity 300ms;
+    opacity: 1;
+    transition: opacity 300ms ease-out;
 }
 
 img.lazyload:not([src]) {
-  visibility: hidden;
+    visibility: hidden;
+}
+
+/* Loading placeholder for images */
+.img-placeholder {
+    background: var(--bg-2);
+    position: relative;
+    overflow: hidden;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 100%
+        );
+        animation: shimmer 1.5s infinite;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Error states */
+.error-message {
+    padding: $space-l;
+    text-align: center;
+    color: var(--text-2);
+    background: var(--bg-2);
+    border-radius: $radius-md;
+}
+
+/* Print styles */
+@media print {
+    .album-card-overlay {
+        display: none;
+    }
+    
+    .lazyloaded {
+        opacity: 1 !important;
+    }
 }

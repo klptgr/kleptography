@@ -1,10 +1,13 @@
 {{ define "main" }}
-  {{ partial "title.html" . }}
-  {{ partial "gallery.html" . }}
-  {{ partial "related.html" . }}
-  {{ with .Content }}
-    <section class="prose">
-      {{ . }}
+<div class="album-page">
+    {{ partial "page-header.html" . }}
+    
+    {{ with .Content }}
+    <section class="page-content">
+        {{ . }}
     </section>
-  {{ end }}
+    {{ end }}
+    
+    {{ partial "gallery.html" . }}
+</div>
 {{ end }}

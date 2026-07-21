@@ -1,14 +1,28 @@
-<div class="site-nav-left">
-    <a href="/portfolio/" {{ if eq .Section "portfolio" }}class="active"{{ end }}>Portfolio</a>
-    <a href="/stories/" {{ if eq .Section "stories" }}class="active"{{ end }}>Stories</a>
-    <a href="/flow/" {{ if eq .Section "flow" }}class="active"{{ end }}>Flow</a>
-    <a href="/why/" {{ if eq .Section "why" }}class="active"{{ end }}>Why</a>
-</div>
+{{ $currentPage := . }}
+<nav class="site-nav-left" aria-label="Main navigation">
+    <a href="{{ "portfolio" | relURL }}" {{ if eq .Section "portfolio" }}class="active"{{ end }} aria-current="{{ if eq .Section "portfolio" }}page{{ else }}false{{ end }}">
+        Portfolio
+    </a>
+    <a href="{{ "stories" | relURL }}" {{ if eq .Section "stories" }}class="active"{{ end }} aria-current="{{ if eq .Section "stories" }}page{{ else }}false{{ end }}">
+        Stories
+    </a>
+    <a href="{{ "flow" | relURL }}" {{ if eq .Section "flow" }}class="active"{{ end }} aria-current="{{ if eq .Section "flow" }}page{{ else }}false{{ end }}">
+        Flow
+    </a>
+    <a href="{{ "why" | relURL }}" {{ if eq .Section "why" }}class="active"{{ end }} aria-current="{{ if eq .Section "why" }}page{{ else }}false{{ end }}">
+        Why
+    </a>
+</nav>
 
 <div class="site-title">
-    <a href="/">KLEPTOGRAPHY</a>
+    <a href="{{ "/" | relURL }}" aria-label="Homepage">
+        KLEPTOGRAPHY
+    </a>
 </div>
 
-<div class="site-nav-right">
-    <a href="https://klepsys.lt" target="_blank" rel="noopener">Me</a>
+<div class="site-nav-right" aria-label="External links">
+    <a href="https://klepsys.lt" target="_blank" rel="noopener noreferrer" aria-label="Visit my personal website">
+        Me
+        <span aria-hidden="true">↗</span>
+    </a>
 </div>

@@ -1,0 +1,64 @@
+/* Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-1);
+    color: var(--text-1);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: $content-width;
+    margin-inline: auto;
+    padding-inline: $space-l;
+    box-sizing: border-box;
+}
+
+/* Shared width */
+header,
+main,
+footer {
+    @extend .container;
+}
+
+/* Vertical spacing */
+header {
+    margin-bottom: $space-xl;
+    
+    @media (min-width: $breakpoint-sm) {
+        margin-bottom: $space-xxl;
+    }
+}
+
+main {
+    margin-bottom: $space-xl;
+    
+    @media (min-width: $breakpoint-sm) {
+        margin-bottom: $space-xxl;
+    }
+}
+
+/* Utility classes */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.sr-only {
+    @extend .visually-hidden;
+}

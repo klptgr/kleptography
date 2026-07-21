@@ -1,0 +1,89 @@
+/* Album card */
+.album-card {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-card;
+    transition: transform $transition, box-shadow $transition;
+    
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+    
+    &:focus-visible {
+        outline: 2px solid var(--text-1);
+        outline-offset: 2px;
+    }
+}
+
+.album-card-image {
+    margin: 0;
+    aspect-ratio: $album-ratio;
+    overflow: hidden;
+    background-color: var(--bg-2);
+    border-radius: $radius-lg;
+}
+
+.album-card-image > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-slow;
+}
+
+.album-card:hover .album-card-image > img {
+    transform: scale(1.05);
+}
+
+/* Overlay */
+.album-card-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $space-l;
+    background: $color-overlay;
+    opacity: 0;
+    transition: opacity $transition;
+    border-radius: $radius-lg;
+    
+    @media (max-width: $breakpoint-md) {
+        opacity: 1;
+        background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.7));
+        align-items: flex-end;
+        padding: $space-m;
+    }
+}
+
+.album-card:hover .album-card-overlay {
+    opacity: 1;
+}
+
+.album-card-title {
+    margin: 0;
+    color: $color-title;
+    font-size: clamp(1.5rem, 3vw, 3rem);
+    font-weight: $font-weight-light;
+    line-height: 1.1;
+    text-align: center;
+    font-variant: small-caps;
+    text-transform: lowercase;
+    letter-spacing: 0.03em;
+    text-shadow: $shadow-title;
+    transition: transform $transition;
+    
+    @media (max-width: $breakpoint-md) {
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+        text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+}
+
+.album-card:hover .album-card-title {
+    transform: scale(1.03);
+}

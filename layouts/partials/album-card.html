@@ -1,17 +1,38 @@
 {{ $gallery := partial "get-gallery.html" . }}
-{{ with $gallery }}
-<a class="card album-card" href="{{ .page.RelPermalink }}" title="{{ .page.Title }}">
-    <figure class="album-card-image" style="background-color: {{ .color }}">
-        <img
-            class="lazyload"
-            width="{{ .thumbnail.Width }}"
-            height="{{ .thumbnail.Height }}"
-            data-src="{{ .thumbnail.RelPermalink }}"
-            alt="{{ .page.Title }}">
-    </figure>
 
-    <div class="album-card-overlay">
-        <h2>{{ .page.Title }}</h2>
+{{ if $gallery }}
+    <a
+        class="album-card"
+        href="{{ $gallery.page.RelPermalink }}"
+        title="{{ $gallery.page.Title }}"
+        aria-label="{{ $gallery.page.Title }}">
+        
+        <figure
+            class="album-card-image"
+            style="background-color: {{ $gallery.color | default "#f5f5f5" }}">
+            
+            {{ $altText := $gallery.page.Title | default $gallery.page.Name }}
+            
+            <img
+                class="lazyload"
+                width="{{ $gallery.thumbnail.Width }}"
+                height="{{ $gallery.thumbnail.Height }}"
+                data-src="{{ $gallery.thumbnail.RelPermalink }}"
+                alt="{{ $altText }}"
+                loading="lazy"
+                decoding="async" />
+                
+        </figure>
+        
+        <div class="album-card-overlay">
+            <h2 class="album-card-title">
+                {{ $gallery.page.Title | default $gallery.page.Name }}
+            </h2>
+        </div>
+    </a>
+{{ else }}
+    <!-- Optionally show a fallback or log an error -->
+    <div class="error-message" role="alert">
+        {{ printf "Gallery not found for: %s" .Title }}
     </div>
-</a>
 {{ end }}

@@ -1,9 +1,18 @@
-@import "clay/variables";
+// Variables first
+@import "site/variables";
 
-@import "clay/layout";
-@import "clay/typography";
+// Base styles
+@import "site/layout";
+@import "site/typography";
 
-@import "clay/header";
+// Components
+@import "site/page";
+@import "site/header";
 
-@import "clay/gallery";
-@import "clay/album-card";
+// Gallery and album
+@import "site/gallery";
+@import "site/album-card";
+@import "site/album";
+
+// Utilities - these should come last to override if needed
+// Add any utility classes here

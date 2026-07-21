@@ -1,0 +1,71 @@
+/* Page header */
+.page-header {
+    max-width: 48rem;
+    margin: 0 auto $space-xxl;
+    padding: 0 $space-m;
+    text-align: center;
+    
+    @media (min-width: $breakpoint-sm) {
+        padding: 0 $space-l;
+        margin-bottom: $space-xxl * 1.5;
+    }
+}
+
+/* Page title */
+.page-title {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: $font-weight-light;
+    line-height: 1.1;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+/* Page description */
+.page-description {
+    max-width: 36rem;
+    margin: 1.5rem auto 0;
+    color: var(--text-2);
+    font-size: 1rem;
+    line-height: 1.7;
+    
+    @media (min-width: $breakpoint-sm) {
+        font-size: 1.1rem;
+    }
+}
+
+/* Page content */
+.page-content {
+    max-width: 48rem;
+    margin: 0 auto $space-xxl;
+    padding: 0 $space-m;
+    
+    @media (min-width: $breakpoint-sm) {
+        padding: 0 $space-l;
+    }
+    
+    /* Content typography */
+    h2, h3, h4 {
+        margin-top: $space-xl;
+        margin-bottom: $space-m;
+    }
+    
+    h2:first-child,
+    h3:first-child,
+    h4:first-child {
+        margin-top: 0;
+    }
+    
+    ul, ol {
+        padding-left: $space-l;
+        margin-bottom: $space-m;
+    }
+    
+    blockquote {
+        margin: $space-l 0;
+        padding-left: $space-l;
+        border-left: 4px solid var(--text-2);
+        color: var(--text-2);
+        font-style: italic;
+    }
+}

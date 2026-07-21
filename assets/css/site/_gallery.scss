@@ -1,0 +1,66 @@
+/* Gallery grid - used for album cards on home/portfolio pages */
+.galleries {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem 1.5rem;
+    
+    @media (min-width: $breakpoint-sm) {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 3rem;
+    }
+    
+    @media (min-width: $breakpoint-lg) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Album gallery - used for individual album photo grids */
+.album-gallery {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+    
+    @media (min-width: $breakpoint-sm) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    @media (min-width: $breakpoint-lg) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+    
+    @media (min-width: $breakpoint-xl) {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2.5rem;
+    }
+}
+
+/* Individual gallery item wrapper */
+.gallery-item {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    transition: transform $transition;
+    
+    &:hover {
+        transform: scale(1.02);
+    }
+    
+    &:focus-visible {
+        outline: 2px solid var(--text-1);
+        outline-offset: 2px;
+    }
+}
+
+/* Album page specific */
+.album-page {
+    width: 100%;
+}
+
+/* Gallery section on album page */
+section.gallery {
+    padding-right: 0;
+    padding-left: 0;
+}

@@ -1,11 +1,11 @@
 {{ define "main" }}
-  {{ partial "title.html" . }}
-
-  {{ with site.GetPage "/portfolio" }}
+<div class="home-page">
+    {{ partial "page-header.html" . }}
+    
     <section class="galleries">
-      {{ range where .Pages "Params.private" "ne" true }}
-        {{ partial "album-card.html" . }}
-      {{ end }}
+        {{ range where (site.GetPage "/portfolio").Pages "Params.private" "ne" true }}
+            {{ partial "album-card.html" . }}
+        {{ end }}
     </section>
-  {{ end }}
+</div>
 {{ end }}
