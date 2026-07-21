@@ -1,7 +1,7 @@
 +++
-title = 'Taunus Snowwalkers'
-date = 2026-07-14T13:56:07+02:00
-draft = false
+title = 'Taunus: Snowwalkers'
+date = 2021-01-01
+cover = '015.jpg'
 +++
 
 A beautiful day in the snow.

@@ -1,5 +1,5 @@
 +++
 title = 'Nature'
 weight = 50
-cover = 'nature (1).jpg'
+cover = '001.jpg'
 +++

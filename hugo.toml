@@ -14,3 +14,9 @@ theme = 'gallery' # Tells Hugo to look inside themes/gallery
 [imaging]
   resampleFilter = "Lanczos"
   quality = 85 # Balanced compression for web delivery
+
+
+[params.umami]
+  enable = true
+  scriptUrl = "https://cloud.umami.is/script.js" # Replace if self-hosting
+  websiteId = "ba836aee-bdd9-44f5-8dce-48e1cbf4610a"             # Your website ID from Umami

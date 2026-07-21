@@ -1,0 +1,9 @@
+{{ if and (.Site.Params.umami.enable) (.Site.Params.umami.websiteId) }}
+  {{ if not hugo.IsServer }}
+    <script 
+      defer 
+      src="{{ default "https://cloud.umami.is/script.js" .Site.Params.umami.scriptUrl }}" 
+      data-website-id="{{ .Site.Params.umami.websiteId }}">
+    </script>
+  {{ end }}
+{{ end }}

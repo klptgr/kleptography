@@ -1,5 +1,5 @@
 +++
 title = 'Folded Lands'
-cover = '2018-05-09 130800.jpg'
+cover = '001.jpg'
 weight = 20
 +++
