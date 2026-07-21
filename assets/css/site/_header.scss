@@ -6,10 +6,12 @@
     gap: $space-m;
     padding-top: $space-m;
     padding-bottom: $space-m;
+    position: relative;
+    transition: min-height $transition-slow;
+    z-index: 300;
     
     @media (max-width: $breakpoint-md) {
         grid-template-columns: 1fr;
-        gap: $space-s;
         padding-top: $space-s;
         padding-bottom: $space-s;
     }
@@ -23,9 +25,7 @@
     gap: $space-l;
     
     @media (max-width: $breakpoint-md) {
-        gap: $space-m;
-        justify-content: center;
-        flex-wrap: wrap;
+        display: none;
     }
 }
 
@@ -33,7 +33,7 @@
     justify-content: flex-start;
     
     @media (max-width: $breakpoint-md) {
-        justify-content: center;
+        display: none;
     }
 }
 
@@ -41,7 +41,7 @@
     justify-content: flex-end;
     
     @media (max-width: $breakpoint-md) {
-        justify-content: center;
+        display: none;
     }
 }
 
@@ -88,8 +88,12 @@
     white-space: nowrap;
     
     @media (max-width: $breakpoint-md) {
-        order: -1;
+        grid-column: 1;
+        grid-row: 1;
+        align-self: start;
         justify-self: center;
+        position: relative;
+        z-index: 2;
     }
     
     a {
@@ -104,5 +108,132 @@
         &:hover {
             opacity: .7;
         }
+
+        @media (min-width: $breakpoint-md) {
+            font-size: 2.25rem;
+        }
     }
+}
+
+/* Mobile navigation */
+.mobile-menu {
+    display: none;
+
+    @media (max-width: $breakpoint-md) {
+        align-self: start;
+        display: block;
+        grid-column: 1;
+        grid-row: 1;
+        z-index: 1;
+    }
+
+    .mobile-menu-toggle {
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        display: grid;
+        gap: 5px;
+        padding: $space-s;
+        position: relative;
+        left: $space-m;
+        position: absolute;
+        top: $space-m;
+        z-index: 1;
+
+        span {
+            background: currentColor;
+            display: block;
+            height: 1px;
+            transition: opacity $transition-fast, transform $transition-fast;
+            width: 24px;
+        }
+    }
+}
+
+.mobile-menu-panel {
+    display: grid;
+    gap: $space-m;
+    max-height: 0;
+    height: 0;
+    min-width: 12rem;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    left: 0;
+    text-align: left;
+    top: calc(100% + #{$space-s});
+    z-index: 10;
+
+    a {
+        color: inherit;
+        font-size: clamp(1.25rem, 5vw, 1.5rem);
+        font-weight: $font-weight-light;
+        position: relative;
+        text-decoration: none;
+
+        &.active::after {
+            background: currentColor;
+            bottom: -$space-xs;
+            content: '';
+            height: 1px;
+            left: 0;
+            position: absolute;
+            width: 100%;
+        }
+    }
+
+    .mobile-menu-external {
+        color: var(--text-2);
+        font-size: 0.95rem;
+        margin-top: $space-s;
+    }
+
+    @media (max-width: $breakpoint-md) {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        margin-top: 0;
+        position: relative;
+        top: auto;
+        transition: height $transition-slow, margin-top $transition-slow, padding $transition-slow;
+        z-index: 1;
+    }
+}
+
+.mobile-menu.is-open .mobile-menu-panel {
+    @media (max-width: $breakpoint-md) {
+        margin-top: $space-xl;
+        height: calc(100dvh - 6rem);
+        max-height: none;
+        padding: $space-l 0 0;
+    }
+}
+
+.site-header.is-menu-open {
+    @media (max-width: $breakpoint-md) {
+        margin-bottom: 0;
+        height: 100dvh;
+        min-height: 100dvh;
+        overflow: hidden;
+    }
+}
+
+.mobile-menu.is-open .mobile-menu-toggle {
+    span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+    }
+
+    span:nth-child(2) {
+        opacity: 0;
+    }
+
+    span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+    }
+}
+
+.mobile-menu-copyright {
+    color: var(--text-2);
+    font-size: 0.8rem;
+    margin-top: auto;
 }

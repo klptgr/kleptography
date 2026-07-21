@@ -62,3 +62,9 @@ main {
 .sr-only {
     @extend .visually-hidden;
 }
+
+body.mobile-menu-open {
+    @media (max-width: $breakpoint-md) {
+        overflow: hidden;
+    }
+}

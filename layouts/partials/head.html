@@ -44,5 +44,7 @@
   }}
   {{ $js := resources.Get "js/main.js" | js.Build (dict "minify" true "params" $params) | resources.Fingerprint }}
   <script src="{{ $js.RelPermalink }}" defer></script>
+  {{ $mobileMenu := resources.Get "js/mobile-menu.js" | js.Build | resources.Fingerprint }}
+  <script src="{{ $mobileMenu.RelPermalink }}" defer></script>
   {{- partial "head-custom.html" . -}}
 </head>
