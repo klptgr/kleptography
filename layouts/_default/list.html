@@ -1,6 +1,8 @@
 {{ define "main" }}
 <div class="list-page{{ if eq .Section "portfolio" }} portfolio-page{{ end }}">
-    {{ partial "page-header.html" . }}
+    {{ if not (or (eq .Section "portfolio") (eq .Section "stories")) }}
+        {{ partial "page-header.html" . }}
+    {{ end }}
     
     <section class="page-content">
         {{ .Content }}

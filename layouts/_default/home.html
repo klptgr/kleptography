@@ -1,7 +1,5 @@
 {{ define "main" }}
 <div class="home-page">
-    {{ partial "page-header.html" . }}
-    
     <section class="galleries">
         {{ range where (site.GetPage "/portfolio").Pages "Params.private" "ne" true }}
             {{ partial "album-card.html" . }}

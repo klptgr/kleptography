@@ -2,11 +2,10 @@
 .galleries {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    gap: 2rem 1.5rem;
+    gap: $gallery-gap;
     
     @media (min-width: $breakpoint-sm) {
         grid-template-columns: repeat(2, 1fr);
-        row-gap: 3rem;
     }
     
 }
@@ -37,21 +36,21 @@
 .album-gallery {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    gap: 1rem;
+    gap: $gallery-gap;
     
     @media (min-width: $breakpoint-sm) {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+        gap: $gallery-gap;
     }
     
     @media (min-width: $breakpoint-lg) {
         grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
+        gap: $gallery-gap;
     }
     
     @media (min-width: $breakpoint-xl) {
         grid-template-columns: repeat(4, 1fr);
-        gap: 2.5rem;
+        gap: $gallery-gap;
     }
 }
 
