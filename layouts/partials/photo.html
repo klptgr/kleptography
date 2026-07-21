@@ -5,7 +5,7 @@
     {{ $imageUrl = .full.RelPermalink }}
 {{ end }}
 
-{{ $title := .title | default .image.Name }}
+{{ $title := .title }}
 {{ $altText := $title }}
 
 <a
@@ -16,7 +16,7 @@
     data-pswp-height="{{ .full.Height }}"
     data-pswp-target="{{ .image.Name | urlize }}"
     title="{{ $title }}"
-    aria-label="{{ $title }}"
+    aria-label="{{ $title | default "Open image" }}"
     itemscope
     itemtype="https://schema.org/ImageObject">
 

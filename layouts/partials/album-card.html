@@ -25,9 +25,14 @@
         </figure>
         
         <div class="album-card-overlay">
-            <h2 class="album-card-title">
-                {{ $gallery.page.Title | default $gallery.page.Name }}
-            </h2>
+            <div class="album-card-copy">
+                <h2 class="album-card-title">
+                    {{ $gallery.page.Title | default $gallery.page.Name }}
+                </h2>
+                {{ with $gallery.page.Description }}
+                    <p class="album-card-description">{{ . }}</p>
+                {{ end }}
+            </div>
         </div>
     </a>
 {{ else }}

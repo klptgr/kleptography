@@ -14,11 +14,15 @@
 /* Page title */
 .page-title {
     margin: 0;
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: $font-weight-light;
     line-height: 1.1;
     letter-spacing: .12em;
     text-transform: uppercase;
+
+    @media (max-width: $breakpoint-md) {
+        font-size: 1.75rem;
+    }
 }
 
 /* Page description */

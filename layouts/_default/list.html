@@ -9,8 +9,19 @@
     </section>
 
     <section class="galleries">
-        {{ range where .Pages "Params.private" "ne" true }}
-            {{ partial "album-card.html" . }}
+        {{ $albums := where .Pages "Params.private" "ne" true }}
+        {{ if eq .Section "portfolio" }}
+            {{ range $albums.ByWeight }}
+                {{ partial "album-card.html" . }}
+            {{ end }}
+        {{ else if eq .Section "stories" }}
+            {{ range $albums.ByDate.Reverse }}
+                {{ partial "album-card.html" . }}
+            {{ end }}
+        {{ else }}
+            {{ range $albums }}
+                {{ partial "album-card.html" . }}
+            {{ end }}
         {{ end }}
     </section>
 </div>

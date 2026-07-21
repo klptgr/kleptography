@@ -68,7 +68,7 @@
 .album-card-title {
     margin: 0;
     color: $color-title;
-    font-size: clamp(1.5rem, 3vw, 3rem);
+    font-size: clamp(1.25rem, 2.5vw, 2.25rem);
     font-weight: $font-weight-light;
     line-height: 1.1;
     text-align: center;
@@ -79,11 +79,24 @@
     transition: transform $transition;
     
     @media (max-width: $breakpoint-md) {
-        font-size: clamp(1.2rem, 4vw, 1.8rem);
+        font-size: clamp(1.1rem, 3.5vw, 1.5rem);
         text-shadow: 0 2px 8px rgba(0,0,0,0.8);
     }
 }
 
 .album-card:hover .album-card-title {
     transform: scale(1.03);
+}
+
+.album-card-copy {
+    text-align: center;
+}
+
+.album-card-description {
+    color: $color-title;
+    font-size: 0.95rem;
+    font-weight: $font-weight-light;
+    margin: $space-s 0 0;
+    text-align: left;
+    text-shadow: $shadow-title;
 }

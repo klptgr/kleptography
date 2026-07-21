@@ -13,10 +13,6 @@
                 {{ end }}
             {{ end }}
 
-            {{ if ne .Title .Name }}
-                {{ $title = .Title }}
-            {{ end }}
-
             {{ with .Params.Date }}
                 {{ $date = time . }}
             {{ end }}

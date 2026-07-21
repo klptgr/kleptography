@@ -24,12 +24,7 @@
   {{ partial "opengraph.html" . }}
   {{ $css := resources.Get "/css/main.scss" | toCSS | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
-  {{ $enableDownload := true }}
-  {{ with .Params.build }}
-    {{ if isset . "publishResources" }}
-      {{ $enableDownload = .publishResources }}
-    {{ end }}
-  {{ end }}
+  {{ $enableDownload := false }}
   {{ $params := dict
     "closeTitle" (i18n "closeTitle")
     "zoomTitle" (i18n "zoomTitle")
