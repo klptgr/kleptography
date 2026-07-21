@@ -30,7 +30,12 @@
             ) }}
         {{ end }}
 
-        {{ $publishResources := default true .Params.build.publishResources }}
+        {{ $publishResources := true }}
+        {{ with .Params.build }}
+            {{ if isset . "publishResources" }}
+                {{ $publishResources = .publishResources }}
+            {{ end }}
+        {{ end }}
         {{ $sortBy := .Params.sort_by | default "Name" }}
         {{ $sortOrder := .Params.sort_order | default "asc" }}
 
