@@ -5,5 +5,11 @@
     <section class="page-content">
         {{ .Content }}
     </section>
+
+    <section class="galleries">
+        {{ range where .Pages "Params.private" "ne" true }}
+            {{ partial "album-card.html" . }}
+        {{ end }}
+    </section>
 </div>
 {{ end }}
