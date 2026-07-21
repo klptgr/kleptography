@@ -12,7 +12,7 @@
     {{ end }}
   {{ end }}
   {{ $featured := $cover | default ((.Resources.ByType "image").GetMatch (.Params.featured_image | default "*feature*")) | default (index $images 0) }}
-  {{ $thumbnail := $featured.Filter (slice images.AutoOrient (images.Process "fit 600x600")) }}
+  {{ $thumbnail := $featured.Filter (slice images.AutoOrient (images.Process "fit 1600x1200")) }}
   {{ $color := index $thumbnail.Colors 0 | default "transparent" }}
   {{ $imageCount := 0 }}
   {{ $albumCount := 0 }}

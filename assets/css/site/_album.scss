@@ -59,3 +59,21 @@
 .gallery-item img.lazyloaded {
     opacity: 1;
 }
+
+.album-page--flow .album-gallery {
+    grid-template-columns: 1fr;
+}
+
+.flow-gallery .album-gallery {
+    grid-template-columns: 1fr;
+}
+
+.album-photo-title,
+.album-photo-description {
+    display: block;
+}
+
+.album-photo-title {
+    color: var(--text-1);
+    font-weight: $font-weight-medium;
+}

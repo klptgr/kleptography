@@ -1,5 +1,5 @@
 {{ define "main" }}
-<div class="album-page">
+<div class="album-page{{ if .Params.flow_layout }} album-page--flow{{ end }}">
     {{ partial "page-header.html" . }}
     
     {{ with .Content }}

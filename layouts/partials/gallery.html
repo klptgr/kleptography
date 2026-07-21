@@ -1,4 +1,4 @@
-<section class="gallery album-page">
+<section class="gallery album-page{{ if .Params.flow_layout }} flow-gallery{{ end }}">
     <div class="album-gallery" id="gallery" data-gallery-container>
         {{ $images := slice }}
 
@@ -11,6 +11,10 @@
                 {{ with .Tags.ImageDescription }}
                     {{ $title = . }}
                 {{ end }}
+            {{ end }}
+
+            {{ with .Params.title }}
+                {{ $title = . }}
             {{ end }}
 
             {{ with .Params.Date }}
@@ -34,10 +38,15 @@
         {{ end }}
         {{ $sortBy := .Params.sort_by | default "Name" }}
         {{ $sortOrder := .Params.sort_order | default "asc" }}
+        {{ $isFlow := .Params.flow_layout }}
 
         {{ range sort $images $sortBy $sortOrder }}
             {{ $image := .image }}
-            {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process "fit 400x400")) }}
+            {{ $thumbnailSize := "fit 400x400" }}
+            {{ if $isFlow }}
+                {{ $thumbnailSize = "fit 1600x1600" }}
+            {{ end }}
+            {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process $thumbnailSize)) }}
             {{ $full := $image.Filter (slice images.AutoOrient (images.Process "fit 1600x1600")) }}
             {{ $color := index $thumbnail.Colors 0 | default "transparent" }}
 
@@ -46,8 +55,10 @@
                 "thumbnail" $thumbnail
                 "full" $full
                 "title" .Title
+                "description" $image.Params.description
                 "color" $color
                 "publishResources" $publishResources
+                "showCaption" $isFlow
             ) }}
         {{ end }}
     </div>

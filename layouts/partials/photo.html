@@ -6,6 +6,7 @@
 {{ end }}
 
 {{ $title := .title }}
+{{ $description := .description }}
 {{ $altText := $title }}
 
 <a
@@ -33,9 +34,10 @@
             loading="lazy"
             decoding="async" />
         
-        {{ if $title }}
-        <figcaption class="visually-hidden">
-            {{ $title }}
+        {{ if or $title $description }}
+        <figcaption class="{{ if .showCaption }}album-photo-caption{{ else }}visually-hidden{{ end }}">
+            {{ with $title }}<strong class="album-photo-title">{{ . }}</strong>{{ end }}
+            {{ with $description }}<span class="album-photo-description">{{ . }}</span>{{ end }}
         </figcaption>
         {{ end }}
     </figure>
