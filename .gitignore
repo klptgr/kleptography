@@ -10,6 +10,7 @@ Thumbs.db
 # Editors
 .vscode/
 .idea/
+.wrangler
 
 # Logs
 *.log
