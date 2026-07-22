@@ -60,36 +60,3 @@ a:focus-visible {
     outline: 2px solid var(--text-1);
     outline-offset: 2px;
 }
-
-/* Album card title */
-.album-card-title {
-    margin: 0;
-    color: $color-title;
-    font-size: clamp(2rem, 3vw, 3.4rem);
-    font-weight: $font-weight-light;
-    line-height: 1.1;
-    text-align: center;
-    font-variant: small-caps;
-    text-transform: lowercase;
-    letter-spacing: 0.03em;
-    text-shadow: $shadow-title;
-    transition: transform $transition;
-}
-
-/* Page title */
-.page-title {
-    margin: 0;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: $font-weight-light;
-    line-height: 1.1;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-}
-
-.page-description {
-    max-width: 36rem;
-    margin: 1.5rem auto 0;
-    color: var(--text-2);
-    font-size: 1rem;
-    line-height: 1.7;
-}

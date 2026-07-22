@@ -65,6 +65,10 @@
     opacity: 1;
 }
 
+.album-card-copy {
+    text-align: center;
+}
+
 .album-card-title {
     margin: 0;
     color: $color-title;
@@ -86,10 +90,6 @@
 
 .album-card:hover .album-card-title {
     transform: scale(1.03);
-}
-
-.album-card-copy {
-    text-align: center;
 }
 
 .album-card-description {

@@ -20,3 +20,13 @@ theme = 'gallery' # Tells Hugo to look inside themes/gallery
   enable = true
   scriptUrl = "https://cloud.umami.is/script.js" # Replace if self-hosting
   websiteId = "ba836aee-bdd9-44f5-8dce-48e1cbf4610a"             # Your website ID from Umami
+
+[[menu.footer]]
+  name = "500px"
+  url = "https://500px.com/p/kleptography?view=photos"
+  weight = 10
+
+[[menu.footer]]
+  name = "Me"
+  url = "https://klepsys.lt"
+  weight = 20
