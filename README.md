@@ -45,20 +45,6 @@ This site is a custom implementation of the [Hugo Gallery Theme](https://github.
 └── hugo.toml               # Site configuration
 ```
 
-## Development
-
-To run the site locally:
-
-```bash
-hugo server -D
-```
-
-For environments requiring polling (like some virtual filesystems):
-
-```bash
-hugo server --poll 700ms
-```
-
 ## Deployment
 
 The site is automatically built and deployed to **Cloudflare Pages** on every push to the `main` branch.
