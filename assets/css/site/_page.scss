@@ -9,6 +9,12 @@
         padding: 0 $space-l;
         margin-bottom: $space-xxl * 1.5;
     }
+
+    .album-page--flow & {
+        max-width: 1200px;
+        text-align: left;
+        padding: 0 $space-xs;
+    }
 }
 
 /* Page title */
@@ -36,6 +42,11 @@
     @media (min-width: $breakpoint-sm) {
         font-size: 1.1rem;
     }
+
+    .album-page--flow & {
+        max-width: 100%;
+        margin-left: 0;
+    }
 }
 
 /* Page content */
@@ -46,6 +57,11 @@
     
     @media (min-width: $breakpoint-sm) {
         padding: 0 $space-l;
+    }
+
+    .album-page--flow & {
+        max-width: 1200px;
+        padding: 0 $space-xs;
     }
     
     /* Content typography */

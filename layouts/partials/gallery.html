@@ -1,5 +1,5 @@
 <section class="gallery album-page{{ if .Params.flow_layout }} flow-gallery album-page--flow{{ end }}">
-    <div class="album-gallery" {{ if not .Params.flow_layout }}id="gallery" data-gallery-container{{ end }}>
+    <div class="album-gallery" {{ if .Params.flow_layout }}id="flow-gallery"{{ else }}id="gallery" data-gallery-container{{ end }}>
         {{ $images := slice }}
 
         {{ $isFlow := .Params.flow_layout }}

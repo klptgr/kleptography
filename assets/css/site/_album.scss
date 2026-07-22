@@ -60,36 +60,46 @@
 
 /* Flow / Social Media Feed Layout */
 .flow-gallery .album-gallery {
-    display: flex !important;
-    flex-direction: column !important;
+    display: block !important;
     max-width: 1200px !important;
     margin: 0 auto !important;
-    gap: $space-xxl !important;
 }
 
-.flow-item {
+.gallery-item.flow-item {
     display: block !important;
     width: 100% !important;
-    margin-bottom: 0 !important; /* Spacing handled by gallery gap */
+    margin-bottom: $space-xxl !important;
+    position: static !important;
+    height: auto !important;
+    transform: none !important;
+    
+    &:hover {
+        transform: none !important;
+    }
 }
 
 .flow-gallery .album-photo-image {
     background-color: transparent !important;
     aspect-ratio: auto !important;
     margin: 0 !important;
+    display: block !important;
 }
 
 .flow-gallery .album-photo-image img {
     display: block !important;
-    width: 100% !important;
+    width: auto !important;
+    max-width: 100% !important;
     height: auto !important;
+    max-height: 85vh !important;
+    margin: 0 auto !important;
     border-radius: $radius-md;
+    object-fit: contain !important;
 }
 
 .flow-gallery .album-photo-caption {
     margin-top: $space-m;
     text-align: left;
-    padding: 0 $space-xs;
+    max-width: 100%;
 }
 
 .album-photo-title,

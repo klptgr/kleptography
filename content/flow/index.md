@@ -8,9 +8,9 @@ resources:
     params:
       description: "Madeira, Portugal"
   - src: "083.jpg"
-    title: ""
+    title: "Ponts Couverts"
     params:
-      description: ""
+      description: "Strasbourg, France"
   - src: "082.jpg"
     title: ""
     params:

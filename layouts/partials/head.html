@@ -41,5 +41,9 @@
   <script src="{{ $js.RelPermalink }}" defer></script>
   {{ $mobileMenu := resources.Get "js/mobile-menu.js" | js.Build | resources.Fingerprint }}
   <script src="{{ $mobileMenu.RelPermalink }}" defer></script>
+  {{ if .Params.flow_layout }}
+    {{ $flowJs := resources.Get "js/flow-lightbox.js" | js.Build | resources.Fingerprint }}
+    <script src="{{ $flowJs.RelPermalink }}" defer></script>
+  {{ end }}
   {{- partial "head-custom.html" . -}}
 </head>
