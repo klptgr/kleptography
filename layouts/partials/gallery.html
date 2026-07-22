@@ -1,20 +1,19 @@
-<section class="gallery album-page{{ if .Params.flow_layout }} flow-gallery{{ end }}">
-    <div class="album-gallery" id="gallery" data-gallery-container>
+<section class="gallery album-page{{ if .Params.flow_layout }} flow-gallery album-page--flow{{ end }}">
+    <div class="album-gallery" {{ if not .Params.flow_layout }}id="gallery" data-gallery-container{{ end }}>
         {{ $images := slice }}
 
-        {{ range where (.Resources.ByType "image") "Params.hidden" "ne" true }}
-            {{ $title := "" }}
+        {{ $isFlow := .Params.flow_layout }}
+        {{ $resources := .Resources.ByType "image" }}
+        {{ if $isFlow }}
+            {{ $resources = .Resources.Match "*.jpg" }}
+        {{ end }}
+
+        {{ range where $resources "Params.hidden" "ne" true }}
+            {{ $title := .Title }}
             {{ $date := "" }}
 
             {{ with .Exif }}
                 {{ $date = .Date }}
-                {{ with .Tags.ImageDescription }}
-                    {{ $title = . }}
-                {{ end }}
-            {{ end }}
-
-            {{ with .Params.title }}
-                {{ $title = . }}
             {{ end }}
 
             {{ with .Params.Date }}
@@ -36,9 +35,14 @@
                 {{ $publishResources = .publishResources }}
             {{ end }}
         {{ end }}
+        
         {{ $sortBy := .Params.sort_by | default "Name" }}
         {{ $sortOrder := .Params.sort_order | default "asc" }}
-        {{ $isFlow := .Params.flow_layout }}
+        
+        {{ if $isFlow }}
+            {{ $sortBy = "Name" }}
+            {{ $sortOrder = "desc" }}
+        {{ end }}
 
         {{ range sort $images $sortBy $sortOrder }}
             {{ $image := .image }}

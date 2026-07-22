@@ -6,12 +6,10 @@
     
     @media (min-width: $breakpoint-sm) {
         grid-template-columns: repeat(2, 1fr);
-        gap: $gallery-gap;
     }
     
     @media (min-width: $breakpoint-lg) {
         grid-template-columns: repeat(3, 1fr);
-        gap: $gallery-gap;
     }
 }
 
@@ -60,12 +58,38 @@
     opacity: 1;
 }
 
-.album-page--flow .album-gallery {
-    grid-template-columns: 1fr;
+/* Flow / Social Media Feed Layout */
+.flow-gallery .album-gallery {
+    display: flex !important;
+    flex-direction: column !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    gap: $space-xxl !important;
 }
 
-.flow-gallery .album-gallery {
-    grid-template-columns: 1fr;
+.flow-item {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 0 !important; /* Spacing handled by gallery gap */
+}
+
+.flow-gallery .album-photo-image {
+    background-color: transparent !important;
+    aspect-ratio: auto !important;
+    margin: 0 !important;
+}
+
+.flow-gallery .album-photo-image img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    border-radius: $radius-md;
+}
+
+.flow-gallery .album-photo-caption {
+    margin-top: $space-m;
+    text-align: left;
+    padding: 0 $space-xs;
 }
 
 .album-photo-title,
@@ -75,5 +99,13 @@
 
 .album-photo-title {
     color: var(--text-1);
-    font-weight: $font-weight-medium;
+    font-weight: $font-weight-semibold;
+    font-size: 1.1rem;
+    margin-bottom: $space-xs;
+}
+
+.album-photo-description {
+    color: var(--text-2);
+    font-size: 0.95rem;
+    line-height: 1.6;
 }
