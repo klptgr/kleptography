@@ -1,7 +1,7 @@
 /* Footer */
 .site-footer {
-    padding: $space-xl 0;
-    margin-top: $space-xxl;
+    padding: $space-s 0;
+    margin-top: $space-l;
     border-top: 1px solid var(--bg-2);
     text-align: center;
     color: var(--text-2);
@@ -18,7 +18,7 @@
     }
     
     .copyright {
-        margin-bottom: $space-m;
+        margin-bottom: $space-l;
     }
     
     .footer-links {

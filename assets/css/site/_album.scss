@@ -60,15 +60,17 @@
 
 /* Flow / Social Media Feed Layout */
 .flow-gallery .album-gallery {
-    display: block !important;
+    display: flex !important;
+    flex-direction: column !important;
     max-width: 1200px !important;
     margin: 0 auto !important;
+    gap: $space-xxl !important;
 }
 
 .gallery-item.flow-item {
     display: block !important;
     width: 100% !important;
-    margin-bottom: $space-xxl !important;
+    margin-bottom: 0 !important;
     position: static !important;
     height: auto !important;
     transform: none !important;

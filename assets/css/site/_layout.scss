@@ -40,10 +40,10 @@ header {
 }
 
 main {
-    margin-bottom: $space-xl;
+    margin-bottom: $space-m;
     
     @media (min-width: $breakpoint-sm) {
-        margin-bottom: $space-xxl;
+        margin-bottom: $space-l;
     }
 }
 
