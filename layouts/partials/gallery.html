@@ -12,7 +12,7 @@
             {{ $title := .Title }}
             {{ $date := "" }}
 
-            {{ with .Exif }}
+            {{ with .Meta.Exif }}
                 {{ $date = .Date }}
             {{ end }}
 
