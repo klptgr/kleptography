@@ -10,6 +10,11 @@
 
         {{ range where $resources "Params.hidden" "ne" true }}
             {{ $title := .Title }}
+            
+            {{ if eq $title .Name }}
+                {{ $title = "" }}   
+            {{ end }}
+
             {{ $date := "" }}
 
             {{ with .Meta.Exif }}
