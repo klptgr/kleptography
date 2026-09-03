@@ -1,3 +1,5 @@
+@use "sass:math";
+
 /* Colors - SCSS Variables */
 $color-overlay: rgba(0, 0, 0, 0.45);
 $color-title: #fff;
@@ -39,7 +41,7 @@ $transition: 0.3s ease;
 $transition-slow: 0.5s ease;
 
 /* Layout */
-$album-ratio: 4 / 3;
+$album-ratio: math.div(4, 3);
 
 /* Breakpoints */
 $breakpoint-sm: 640px;

@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 /* Reset */
 *,
 *::before,
@@ -14,8 +16,11 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Container */
-.container {
+/* Unified Container Layout */
+.container,
+header,
+main,
+footer {
     width: 100%;
     max-width: $content-width;
     margin-inline: auto;
@@ -23,17 +28,10 @@ body {
     box-sizing: border-box;
 }
 
-/* Shared width */
-header,
-main,
-footer {
-    @extend .container;
-}
-
 /* Vertical spacing */
 header {
     margin-bottom: $space-xl;
-    
+
     @media (min-width: $breakpoint-sm) {
         margin-bottom: $space-xxl;
     }
@@ -41,14 +39,15 @@ header {
 
 main {
     margin-bottom: $space-m;
-    
+
     @media (min-width: $breakpoint-sm) {
         margin-bottom: $space-l;
     }
 }
 
-/* Utility classes */
-.visually-hidden {
+/* Accessibility & Screen Reader Classes */
+.visually-hidden,
+.sr-only {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -56,11 +55,8 @@ main {
     margin: -1px;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
     border: 0;
-}
-
-.sr-only {
-    @extend .visually-hidden;
 }
 
 body.mobile-menu-open {

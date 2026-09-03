@@ -1,13 +1,15 @@
-/* Album gallery container */
+@use "variables" as *;
+
+/* Standard Album Grid Layout */
 .album-gallery {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
     gap: $gallery-gap;
-    
+
     @media (min-width: $breakpoint-sm) {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     @media (min-width: $breakpoint-lg) {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -19,89 +21,80 @@
     text-decoration: none;
     color: inherit;
     transition: transform $transition;
-    
+
     &:hover {
         transform: scale(1.02);
     }
-    
+
     &:focus-visible {
         outline: 2px solid var(--text-1);
         outline-offset: 2px;
     }
-}
 
-.gallery-item figure {
-    margin: 0;
-}
+    figure {
+        margin: 0;
+    }
 
-.gallery-item img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
 
-.gallery-item figcaption {
-    margin-top: .75rem;
-    color: var(--text-2);
-    font-size: .9rem;
-    line-height: 1.5;
-}
-
-/* Loading state */
-.gallery-item img.lazyload,
-.gallery-item img.lazyloading {
-    opacity: 0;
-    transition: opacity 300ms;
-}
-
-.gallery-item img.lazyloaded {
-    opacity: 1;
-}
-
-/* Flow / Social Media Feed Layout */
-.flow-gallery .album-gallery {
-    display: flex !important;
-    flex-direction: column !important;
-    max-width: 1200px !important;
-    margin: 0 auto !important;
-    gap: $space-xxl !important;
-}
-
-.gallery-item.flow-item {
-    display: block !important;
-    width: 100% !important;
-    margin-bottom: 0 !important;
-    position: static !important;
-    height: auto !important;
-    transform: none !important;
-    
-    &:hover {
-        transform: none !important;
+    figcaption {
+        margin-top: 0.75rem;
+        color: var(--text-2);
+        font-size: 0.9rem;
+        line-height: 1.5;
     }
 }
 
-.flow-gallery .album-photo-image {
-    background-color: transparent !important;
-    aspect-ratio: auto !important;
-    margin: 0 !important;
-    display: block !important;
-}
+/* Flow / Social Media Feed Layout (Cleaned of !important) */
+.flow-gallery {
+    .album-gallery {
+        display: flex;
+        flex-direction: column;
+        max-width: 1200px;
+        margin-inline: auto;
+        gap: $space-xxl;
+    }
 
-.flow-gallery .album-photo-image img {
-    display: block !important;
-    width: auto !important;
-    max-width: 100% !important;
-    height: auto !important;
-    max-height: 85vh !important;
-    margin: 0 auto !important;
-    border-radius: $radius-md;
-    object-fit: contain !important;
-}
+    .gallery-item.flow-item {
+        display: block;
+        width: 100%;
+        margin-bottom: 0;
+        position: static;
+        height: auto;
+        transform: none;
 
-.flow-gallery .album-photo-caption {
-    margin-top: $space-m;
-    text-align: left;
-    max-width: 100%;
+        &:hover {
+            transform: none;
+        }
+    }
+
+    .album-photo-image {
+        background-color: transparent;
+        aspect-ratio: auto;
+        margin: 0;
+        display: block;
+
+        img {
+            display: block;
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 85vh;
+            margin-inline: auto;
+            border-radius: $radius-md;
+            object-fit: contain;
+        }
+    }
+
+    .album-photo-caption {
+        margin-top: $space-m;
+        text-align: left;
+        max-width: 100%;
+    }
 }
 
 .album-photo-title,

@@ -1,34 +1,33 @@
-{{ $currentPage := . }}
+{{ $navItems := slice 
+    (dict "name" "Portfolio" "url" "/portfolio")
+    (dict "name" "Stories" "url" "/stories")
+    (dict "name" "Flow" "url" "/flow")
+    (dict "name" "Why" "url" "/why")
+}}
+
 <nav class="site-nav-left" aria-label="Main navigation">
-    <a href="{{ "portfolio" | relURL }}" {{ if eq .Section "portfolio" }}class="active"{{ end }} aria-current="{{ if eq .Section "portfolio" }}page{{ else }}false{{ end }}">
-        Portfolio
-    </a>
-    <a href="{{ "stories" | relURL }}" {{ if eq .Section "stories" }}class="active"{{ end }} aria-current="{{ if eq .Section "stories" }}page{{ else }}false{{ end }}">
-        Stories
-    </a>
-    <a href="{{ "flow" | relURL }}" {{ if eq .Section "flow" }}class="active"{{ end }} aria-current="{{ if eq .Section "flow" }}page{{ else }}false{{ end }}">
-        Flow
-    </a>
-    <a href="{{ "why" | relURL }}" {{ if eq .Section "why" }}class="active"{{ end }} aria-current="{{ if eq .Section "why" }}page{{ else }}false{{ end }}">
-        Why
-    </a>
+    {{ range $navItems }}
+        {{ $active := eq $.Section (strings.TrimPrefix "/" .url) }}
+        <a href="{{ .url | relURL }}" 
+           class="{{ if $active }}active{{ end }}" 
+           aria-current="{{ if $active }}page{{ else }}false{{ end }}">
+            {{ .name }}
+        </a>
+    {{ end }}
 </nav>
 
 <div class="site-title">
     <a href="{{ "/" | relURL }}" aria-label="Homepage">
-        KLEPTOGRAPHY
+        {{ site.Title | default "KLEPTOGRAPHY" }}
     </a>
 </div>
 
 <div class="site-nav-right" aria-label="External links">
-    <a href="https://500px.com/p/kleptography?view=photos" target="_blank" rel="noopener noreferrer">
-        500px
-        <span aria-hidden="true">&#8599;</span>
-    </a>
-    <a href="https://klepsys.lt" target="_blank" rel="noopener noreferrer" aria-label="Visit my personal website">
-        Me
-        <span aria-hidden="true">↗</span>
-    </a>
+    {{ range site.Menus.footer }}
+        <a href="{{ .URL | safeURL }}" target="_blank" rel="noopener noreferrer">
+            {{ .Name }} <span aria-hidden="true">&#8599;</span>
+        </a>
+    {{ end }}
 </div>
 
 <div class="mobile-menu">
@@ -36,16 +35,17 @@
         <span></span><span></span><span></span>
     </button>
     <nav class="mobile-menu-panel" id="mobile-menu-panel" aria-label="Mobile navigation" aria-hidden="true">
-        <a href="{{ "portfolio" | relURL }}" {{ if eq .Section "portfolio" }}class="active" aria-current="page"{{ end }}>Portfolio</a>
-        <a href="{{ "stories" | relURL }}" {{ if eq .Section "stories" }}class="active" aria-current="page"{{ end }}>Stories</a>
-        <a href="{{ "flow" | relURL }}" {{ if eq .Section "flow" }}class="active" aria-current="page"{{ end }}>Flow</a>
-        <a href="{{ "why" | relURL }}" {{ if eq .Section "why" }}class="active" aria-current="page"{{ end }}>Why</a>
-        <a class="mobile-menu-external" href="https://500px.com/p/kleptography?view=photos" target="_blank" rel="noopener noreferrer">
-            500px <span aria-hidden="true">&#8599;</span>
-        </a>
-        <a class="mobile-menu-external" href="https://klepsys.lt" target="_blank" rel="noopener noreferrer">
-            Me <span aria-hidden="true">&#8599;</span>
-        </a>
-        <span class="mobile-menu-copyright">&copy; {{ now.Year }} {{ .Site.Title }}</span>
+        {{ range $navItems }}
+            {{ $active := eq $.Section (strings.TrimPrefix "/" .url) }}
+            <a href="{{ .url | relURL }}" {{ if $active }}class="active" aria-current="page"{{ end }}>
+                {{ .name }}
+            </a>
+        {{ end }}
+        {{ range site.Menus.footer }}
+            <a class="mobile-menu-external" href="{{ .URL | safeURL }}" target="_blank" rel="noopener noreferrer">
+                {{ .Name }} <span aria-hidden="true">&#8599;</span>
+            </a>
+        {{ end }}
+        <span class="mobile-menu-copyright">&copy; {{ now.Year }} {{ site.Title }}</span>
     </nav>
 </div>

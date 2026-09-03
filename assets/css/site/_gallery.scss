@@ -1,80 +1,43 @@
+@use "variables" as *;
+
 /* Gallery grid - used for album cards on home/portfolio pages */
 .galleries {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
     gap: $gallery-gap;
-    
+
     @media (min-width: $breakpoint-sm) {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+/* Featured 3rd album hero card */
 @media (min-width: $breakpoint-sm) {
-    .home-page .galleries > .album-card:nth-child(3),
-    .portfolio-page .galleries > .album-card:nth-child(3) {
-        grid-column: 1 / -1;
-    }
+    .home-page,
+    .portfolio-page {
+        .galleries > .album-card:nth-child(3) {
+            grid-column: 1 / -1;
 
-    .home-page .galleries > .album-card:nth-child(3) .album-card-image,
-    .portfolio-page .galleries > .album-card:nth-child(3) .album-card-image {
-        aspect-ratio: 8 / 3;
-    }
+            .album-card-image {
+                aspect-ratio: 8 / 3;
 
-    .home-page .galleries > .album-card:nth-child(3) .album-card-image > img,
-    .portfolio-page .galleries > .album-card:nth-child(3) .album-card-image > img {
-        transform: scale(1.06);
-    }
+                > img {
+                    transform: scale(1.06);
+                }
+            }
 
-    .home-page .galleries > .album-card:nth-child(3):hover .album-card-image > img,
-    .portfolio-page .galleries > .album-card:nth-child(3):hover .album-card-image > img {
-        transform: scale(1.1);
+            &:hover .album-card-image > img {
+                transform: scale(1.1);
+            }
+        }
     }
 }
 
-/* Album gallery - used for individual album photo grids */
-.album-gallery {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: $gallery-gap;
-    
-    @media (min-width: $breakpoint-sm) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    @media (min-width: $breakpoint-lg) {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    @media (min-width: $breakpoint-xl) {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-/* Individual gallery item wrapper */
-.gallery-item {
-    display: block;
-    position: relative;
-    text-decoration: none;
-    color: inherit;
-    transition: transform $transition;
-    
-    &:hover {
-        transform: scale(1.02);
-    }
-    
-    &:focus-visible {
-        outline: 2px solid var(--text-1);
-        outline-offset: 2px;
-    }
-}
-
-/* Album page specific */
+/* Album page wrapper */
 .album-page {
     width: 100%;
 }
 
-/* Gallery section on album page */
 section.gallery {
-    padding-right: 0;
-    padding-left: 0;
+    padding-inline: 0;
 }

@@ -1,16 +1,29 @@
 /* Third-party */
-@import "normalize";
-@import "photoswipe/photoswipe";
-@import "photoswipe/photoswipe-dynamic-caption-plugin";
+@use "normalize";
+@use "photoswipe/photoswipe";
+@use "photoswipe/photoswipe-dynamic-caption-plugin";
 
-/* Custom styles */
-@import "custom";
+/* Site Architecture (loaded in order) */
+@use "site/variables" as *;
+@use "site/layout";
+@use "site/typography";
+@use "site/page";
+@use "site/header";
+@use "site/gallery";
+@use "site/album-card";
+@use "site/album";
+@use "site/footer";
+
+/* CSS Variable Fallbacks */
+$space-l: var(--space-l, 1.5rem);
+$radius-md: var(--radius-md, 4px);
 
 /* Lazy loading */
 .lazyload,
 .lazyloading {
     opacity: 0;
     transition: opacity 300ms ease-in;
+    will-change: opacity;
 }
 
 .lazyloaded {
@@ -24,10 +37,10 @@ img.lazyload:not([src]) {
 
 /* Loading placeholder for images */
 .img-placeholder {
-    background: var(--bg-2);
+    background-color: var(--bg-2, #f3f4f6);
     position: relative;
     overflow: hidden;
-    
+
     &::after {
         content: '';
         position: absolute;
@@ -35,19 +48,26 @@ img.lazyload:not([src]) {
         background: linear-gradient(
             90deg,
             transparent 0%,
-            rgba(255, 255, 255, 0.1) 50%,
+            rgba(255, 255, 255, 0.12) 50%,
             transparent 100%
         );
-        animation: shimmer 1.5s infinite;
+        animation: shimmer 1.5s infinite linear;
     }
 }
 
 @keyframes shimmer {
-    0% {
-        transform: translateX(-100%);
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .img-placeholder::after {
+        animation: none;
     }
-    100% {
-        transform: translateX(100%);
+    .lazyload,
+    .lazyloading,
+    .lazyloaded {
+        transition: none;
     }
 }
 
@@ -55,18 +75,19 @@ img.lazyload:not([src]) {
 .error-message {
     padding: $space-l;
     text-align: center;
-    color: var(--text-2);
-    background: var(--bg-2);
+    color: var(--text-2, #6b7280);
+    background-color: var(--bg-2, #f3f4f6);
     border-radius: $radius-md;
 }
 
 /* Print styles */
 @media print {
     .album-card-overlay {
-        display: none;
+        display: none !important;
     }
-    
+
     .lazyloaded {
         opacity: 1 !important;
+        visibility: visible !important;
     }
 }

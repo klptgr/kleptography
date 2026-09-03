@@ -1,34 +1,30 @@
 {{ $gallery := partial "get-gallery.html" . }}
 
 {{ if $gallery }}
+    {{ $title := $gallery.page.Title | default $gallery.page.Name }}
     <a
         class="album-card"
         href="{{ $gallery.page.RelPermalink }}"
-        title="{{ $gallery.page.Title }}"
-        aria-label="{{ $gallery.page.Title }}">
+        title="{{ $title }}"
+        aria-label="{{ $title }}">
         
         <figure
             class="album-card-image"
             style="background-color: {{ $gallery.color | default "#f5f5f5" }}">
-            
-            {{ $altText := $gallery.page.Title | default $gallery.page.Name }}
             
             <img
                 class="lazyload"
                 width="{{ $gallery.thumbnail.Width }}"
                 height="{{ $gallery.thumbnail.Height }}"
                 data-src="{{ $gallery.thumbnail.RelPermalink }}"
-                alt="{{ $altText }}"
+                alt="{{ $title }}"
                 loading="lazy"
                 decoding="async" />
-                
         </figure>
         
         <div class="album-card-overlay">
             <div class="album-card-copy">
-                <h2 class="album-card-title">
-                    {{ $gallery.page.Title | default $gallery.page.Name }}
-                </h2>
+                <h2 class="album-card-title">{{ $title }}</h2>
                 {{ with $gallery.page.Description }}
                     <p class="album-card-description">{{ . }}</p>
                 {{ end }}
@@ -36,8 +32,7 @@
         </div>
     </a>
 {{ else }}
-    <!-- Optionally show a fallback or log an error -->
     <div class="error-message" role="alert">
-        {{ printf "Gallery not found for: %s" .Title }}
+        {{ printf "Gallery not found for: %s" (.Title | default "Untitled") }}
     </div>
 {{ end }}

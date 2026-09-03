@@ -1,30 +1,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <title>{{ with .Title }}{{ . }} -{{ end }} {{ .Site.Title }}</title>
+
+  <title>{{ with .Title }}{{ . }} - {{ end }}{{ site.Title }}</title>
   <link rel="canonical" href="{{ .Permalink }}" />
+
   <link rel="icon" type="image/svg+xml" href="{{ "images/favicon.svg" | relURL }}" />
   <link rel="icon" type="image/png" href="{{ "images/favicon.png" | relURL }}" />
   <link rel="apple-touch-icon" sizes="180x180" href="{{ "images/apple-touch-icon.png" | relURL }}" />
-  <meta name="description" content="{{ with .Description }}{{ . | markdownify | plainify }}{{ else }}{{ with .Site.Params.description }}{{ . | markdownify | plainify }}{{ end }}{{ end }}" />
-  {{ if .Params.keywords }}
-    <meta name="keywords" content="{{ delimit .Params.keywords `, ` }}" />
+
+  {{ $desc := .Description | default site.Params.description | plainify }}
+  {{ with $desc }}
+    <meta name="description" content="{{ . }}" />
   {{ end }}
-  {{ if .Params.private }}
-    <meta name="robots" content="noindex, nofollow" />
-  {{ else }}
-    <meta name="robots" content="index, follow" />
+
+  {{ with .Params.keywords }}
+    <meta name="keywords" content="{{ delimit . ", " }}" />
   {{ end }}
-  {{ range .AlternativeOutputFormats -}}
+
+  <meta name="robots" content="{{ if .Params.private }}noindex, nofollow{{ else }}index, follow{{ end }}" />
+
+  {{ range .AlternativeOutputFormats }}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
-  {{ end -}}
+  {{ end }}
+
   {{ partial "opengraph.html" . }}
-  {{ $css := resources.Get "/css/main.scss" | toCSS | minify | fingerprint }}
-  <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
-  {{ $enableDownload := false }}
+
+{{/* Modern Hugo SCSS Processing */}}
+  {{ $cssOpts := dict "transpiler" "dartsass" "outputStyle" "compressed" }}
+  {{ $css := resources.Get "css/main.scss" | css.Sass $cssOpts | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+
   {{ $params := dict
     "closeTitle" (i18n "closeTitle")
     "zoomTitle" (i18n "zoomTitle")
@@ -35,15 +45,19 @@
     "boxSpacing" (default 8 .Site.Params.gallery.boxSpacing)
     "targetRowHeight" (default 288 .Site.Params.gallery.targetRowHeight)
     "targetRowHeightTolerance" (default 0.25 .Site.Params.gallery.targetRowHeightTolerance)
-    "enableDownload" $enableDownload
+    "enableDownload" false
   }}
-  {{ $js := resources.Get "js/main.js" | js.Build (dict "minify" true "params" $params) | resources.Fingerprint }}
-  <script src="{{ $js.RelPermalink }}" defer></script>
-  {{ $mobileMenu := resources.Get "js/mobile-menu.js" | js.Build | resources.Fingerprint }}
-  <script src="{{ $mobileMenu.RelPermalink }}" defer></script>
+
+  {{ $js := resources.Get "js/main.js" | js.Build (dict "minify" true "params" $params) | fingerprint }}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+
+  {{ $mobileMenu := resources.Get "js/mobile-menu.js" | js.Build (dict "minify" true) | fingerprint }}
+  <script src="{{ $mobileMenu.RelPermalink }}" integrity="{{ $mobileMenu.Data.Integrity }}" defer></script>
+
   {{ if .Params.flow_layout }}
-    {{ $flowJs := resources.Get "js/flow-lightbox.js" | js.Build | resources.Fingerprint }}
-    <script src="{{ $flowJs.RelPermalink }}" defer></script>
+    {{ $flowJs := resources.Get "js/flow-lightbox.js" | js.Build (dict "minify" true) | fingerprint }}
+    <script src="{{ $flowJs.RelPermalink }}" integrity="{{ $flowJs.Data.Integrity }}" defer></script>
   {{ end }}
-  {{- partial "head-custom.html" . -}}
+
+  {{ partial "head-custom.html" . }}
 </head>

@@ -1,29 +1,19 @@
-<section class="gallery album-page{{ if .Params.flow_layout }} flow-gallery album-page--flow{{ end }}">
-    <div class="album-gallery" {{ if .Params.flow_layout }}id="flow-gallery"{{ else }}id="gallery" data-gallery-container{{ end }}>
-        {{ $images := slice }}
-
-        {{ $isFlow := .Params.flow_layout }}
-        {{ $resources := .Resources.ByType "image" }}
+{{ $isFlow := .Params.flow_layout }}
+<section class="gallery album-page{{ if $isFlow }} flow-gallery album-page--flow{{ end }}">
+    <div class="album-gallery" {{ if $isFlow }}id="flow-gallery"{{ else }}id="gallery" data-gallery-container{{ end }}>
+        {{ $rawImages := .Resources.ByType "image" }}
         {{ if $isFlow }}
-            {{ $resources = .Resources.Match "*.jpg" }}
+            {{ $rawImages = .Resources.Match "*.jpg" }}
         {{ end }}
 
-        {{ range where $resources "Params.hidden" "ne" true }}
+        {{ $images := slice }}
+        {{ range where $rawImages "Params.hidden" "ne" true }}
             {{ $title := .Title }}
-            
-            {{ if eq $title .Name }}
-                {{ $title = "" }}   
-            {{ end }}
+            {{ if eq $title .Name }}{{ $title = "" }}{{ end }}
 
             {{ $date := "" }}
-
-            {{ with .Meta.Exif }}
-                {{ $date = .Date }}
-            {{ end }}
-
-            {{ with .Params.Date }}
-                {{ $date = time . }}
-            {{ end }}
+            {{ with .Meta.Exif }}{{ $date = .Date }}{{ end }}
+            {{ with .Params.Date }}{{ $date = time . }}{{ end }}
 
             {{ $images = $images | append (dict
                 "image" .
@@ -35,36 +25,26 @@
         {{ end }}
 
         {{ $publishResources := true }}
-        {{ with .Params.build }}
-            {{ if isset . "publishResources" }}
-                {{ $publishResources = .publishResources }}
-            {{ end }}
-        {{ end }}
-        
-        {{ $sortBy := .Params.sort_by | default "Name" }}
-        {{ $sortOrder := .Params.sort_order | default "asc" }}
-        
-        {{ if $isFlow }}
-            {{ $sortBy = "Name" }}
-            {{ $sortOrder = "desc" }}
+        {{ with .Params.build.publishResources }}
+            {{ $publishResources = . }}
         {{ end }}
 
+        {{ $sortBy := cond $isFlow "Name" (.Params.sort_by | default "Name") }}
+        {{ $sortOrder := cond $isFlow "desc" (.Params.sort_order | default "asc") }}
+
         {{ range sort $images $sortBy $sortOrder }}
-            {{ $image := .image }}
-            {{ $thumbnailSize := "fit 400x400" }}
-            {{ if $isFlow }}
-                {{ $thumbnailSize = "fit 1600x1600" }}
-            {{ end }}
-            {{ $thumbnail := $image.Filter (slice images.AutoOrient (images.Process $thumbnailSize)) }}
-            {{ $full := $image.Filter (slice images.AutoOrient (images.Process "fit 1600x1600")) }}
+            {{ $img := .image }}
+            {{ $thumbSpec := cond $isFlow "fit 2000x2000 q88" "fit 900x900 q88" }}
+            {{ $thumbnail := $img.Filter (slice images.AutoOrient (images.Process $thumbSpec) (images.UnsharpMask 0.5 0.5 0.05)) }}
+            {{ $full := $img.Filter (slice images.AutoOrient (images.Process "fit 1600x1600")) }}
             {{ $color := index $thumbnail.Colors 0 | default "transparent" }}
 
             {{ partial "photo.html" (dict
-                "image" $image
+                "image" $img
                 "thumbnail" $thumbnail
                 "full" $full
                 "title" .Title
-                "description" $image.Params.description
+                "description" $img.Params.description
                 "color" $color
                 "publishResources" $publishResources
                 "showCaption" $isFlow

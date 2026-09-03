@@ -1,13 +1,15 @@
-/* Page header */
+@use "variables" as *;
+
+/* Page header (Title & Subtitle remain centered) */
 .page-header {
     max-width: 48rem;
     margin: 0 auto $space-xxl;
     padding: 0 $space-m;
     text-align: center;
-    
+
     @media (min-width: $breakpoint-sm) {
         padding: 0 $space-l;
-        margin-bottom: $space-xxl * 1.5;
+        margin-bottom: calc($space-xxl * 1.5);
     }
 
     .album-page--flow & {
@@ -25,6 +27,7 @@
     line-height: 1.1;
     letter-spacing: .12em;
     text-transform: uppercase;
+    text-align: center;
 
     @media (max-width: $breakpoint-md) {
         font-size: 1.75rem;
@@ -38,7 +41,8 @@
     color: var(--text-2);
     font-size: 1rem;
     line-height: 1.7;
-    
+    text-align: center;
+
     @media (min-width: $breakpoint-sm) {
         font-size: 1.1rem;
     }
@@ -49,38 +53,35 @@
     }
 }
 
-/* Page content */
+/* Page content (Story text body left-aligned with gallery edge) */
 .page-content {
-    max-width: 48rem;
-    margin: 0 auto $space-xxl;
-    padding: 0 $space-m;
-    
-    @media (min-width: $breakpoint-sm) {
-        padding: 0 $space-l;
-    }
+    max-width: 48rem;       /* Keeps comfortable reading measure */
+    margin: 0 0 $space-xxl; /* Removes horizontal centering; grounds to left */
+    padding: 0;             /* Eliminates gutter padding so it snaps to grid edge */
+    text-align: left;
 
     .album-page--flow & {
         max-width: 1200px;
         padding: 0 $space-xs;
     }
-    
+
     /* Content typography */
     h2, h3, h4 {
         margin-top: $space-xl;
         margin-bottom: $space-m;
     }
-    
+
     h2:first-child,
     h3:first-child,
     h4:first-child {
         margin-top: 0;
     }
-    
+
     ul, ol {
         padding-left: $space-l;
         margin-bottom: $space-m;
     }
-    
+
     blockquote {
         margin: $space-l 0;
         padding-left: $space-l;
